@@ -35,6 +35,44 @@ The feature selection techniques used are:
 3.Embedded Method
 
 # CODING AND OUTPUT:
-       # INCLUDE YOUR CODING AND OUTPUT SCREENSHOTS HERE
+
+```
+import pandas as pd
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, MaxAbsScaler, RobustScaler
+df=pd.read_csv("C:\\Users\\G.POORNIMA DEVI\\Downloads\\bmi.csv")
+sclr=MinMaxScaler()
+df['Height_scaled_minmax']=sclr.fit_transform(df[['Height']])
+df
+```
+
+<img width="1313" height="627" alt="image" src="https://github.com/user-attachments/assets/9051a347-7006-4b77-aef3-f0b97c02175a" />
+
+```
+scl=RobustScaler()
+df['Weight_scaled_robust']=scl.fit_transform(df[['Weight']])
+df
+```
+
+<img width="1396" height="549" alt="image" src="https://github.com/user-attachments/assets/bef91538-c02b-42f3-8acd-cf8e798654d1" />
+
+```
+scale=MaxAbsScaler()
+df['Height_scaled_maxabs']=scale.fit_transform(df[['Height']])
+df
+```
+
+<img width="1356" height="553" alt="image" src="https://github.com/user-attachments/assets/ab407787-6dd8-4536-9ae9-280053ff2294" />
+
+```
+scaler=StandardScaler()
+df['Weight_scaled_std']=scaler.fit_transform(df[['Weight']])
+df
+```
+
+<img width="1318" height="564" alt="image" src="https://github.com/user-attachments/assets/f2bffe59-01ea-4bbf-9950-780bbe30c6e3" />
+
+```
+
+```
 # RESULT:
        # INCLUDE YOUR RESULT HERE
