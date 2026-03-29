@@ -141,4 +141,4 @@ print(selected)
 
 
 # RESULT:
-
+Thus, the code for feature scaling and feature selection is successfully executed.
