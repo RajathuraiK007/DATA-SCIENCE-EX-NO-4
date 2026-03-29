@@ -71,8 +71,74 @@ df
 
 <img width="1318" height="564" alt="image" src="https://github.com/user-attachments/assets/f2bffe59-01ea-4bbf-9950-780bbe30c6e3" />
 
-```
 
 ```
+#Filter Selection
+import pandas as pd
+from sklearn.feature_selection import SelectKBest, chi2
+from sklearn.preprocessing import LabelEncoder, MinMaxScaler
+df=pd.read_csv("C:\\Users\\G.POORNIMA DEVI\\Downloads\\bmi.csv")
+df['Gender_encoded']=encoder.fit_transform(df['Gender'])
+X=df.drop(['Gender','Gender_encoded'],axis=1)
+y=df['Gender_encoded']
+scaler=MinMaxScaler()
+X_scaled=scaler.fit_transform(X)
+selector=SelectKBest(score_func=chi2,k=2)
+selector.fit_transform(X_scaled,y)
+print(X.columns[selector.get_support()].tolist())
+```
+
+<img width="1374" height="306" alt="image" src="https://github.com/user-attachments/assets/5251e3f7-3125-4ebc-8dd8-fc1afd3f0d4a" />
+
+```
+#Wrapper Selection
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.feature_selection import RFE
+from sklearn.preprocessing import LabelEncoder
+
+df=pd.read_csv("C:\\Users\\G.POORNIMA DEVI\\Downloads\\bmi.csv")
+le=LabelEncoder()
+df['Gender_encoded']=le.fit_transform(df['Gender'])
+X=df.drop(['Gender','Gender_encoded'],axis=1)
+y=df['Gender_encoded']
+
+model=LogisticRegression()
+rfe=RFE(estimator=model, n_features_to_select=2)
+rfe.fit(X,y)
+Wrapper_cols=X.columns[rfe.support_].tolist()
+print(Wrapper_cols)
+```
+
+<img width="1346" height="382" alt="image" src="https://github.com/user-attachments/assets/ea6a67ca-65cf-41e0-b77e-d4ee6691c911" />
+
+```
+#Embedded Method
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.linear_model import Lasso
+
+df=pd.read_csv("C:\\Users\\G.POORNIMA DEVI\\Downloads\\bmi.csv")
+
+le=LabelEncoder()
+df['Gender_encoded']=le.fit_transform(df['Gender'])
+
+X=df.drop(['Gender','Gender_encoded'],axis=1)
+y=df['Gender_encoded']
+
+scaler=StandardScaler()
+X_scaled=scaler.fit_transform(X)
+
+lasso=Lasso(alpha=0.01)
+lasso.fit(X_scaled,y)
+
+importance = pd.Series(lasso.coef_, index=X.columns)
+selected=importance[importance!=0].index.tolist()
+print(selected)
+```
+
+<img width="1342" height="483" alt="image" src="https://github.com/user-attachments/assets/fafc1470-10ae-4719-bd10-c18a473b0431" />
+
+
 # RESULT:
-       # INCLUDE YOUR RESULT HERE
+
